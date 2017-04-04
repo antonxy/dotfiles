@@ -168,9 +168,9 @@ bindsym Shift+XF86AudioLowerVolume exec amixer sset Master 1%-
 bindsym Shift+XF86AudioRaiseVolume exec amixer sset Master 1%+
 bindsym XF86AudioMute exec amixer sset Master toggle
 bindsym XF86AudioMicMute exec amixer sset Capture toggle
-bindsym XF86AudioPrev exec /opt/scripts/musickeys.sh prev
-bindsym XF86AudioNext exec /opt/scripts/musickeys.sh next
-bindsym XF86AudioPlay exec /opt/scripts/musickeys.sh play
+bindsym XF86AudioPlay exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym XF86AudioPrev exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym XF86AudioNext exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
 #Toggle Touchpad
 exec /opt/scripts/touchpad_toggle.sh off
