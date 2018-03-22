@@ -59,6 +59,9 @@ in
       " Normal backspace
       set backspace=indent,eol,start
 
+      " Hightlight search
+      set hlsearch
+
       " NERD Tree
       map <C-n> :NERDTreeToggle<CR>
 
@@ -99,6 +102,11 @@ in
       endfunction
 
       nnoremap <leader>h :call <SID>SwitchSourceHeader()<CR>
+
+      " Allow saving of files as sudo
+      if !exists(":SudoW")
+          command SudoW w !sudo tee % > /dev/null
+      endif
     '';
 
     vimrcConfig.vam.knownPlugins = super.vimPlugins // customPlugins;
@@ -111,6 +119,7 @@ in
             "ack-vim"
             "vim-buftabline"
             "editorconfig-vim"
+            "vim-gitgutter"
         ]; }
     ];
   };
