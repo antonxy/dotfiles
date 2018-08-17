@@ -1,0 +1,20 @@
+! Unmap capslock
+clear Lock
+keycode 66 = Hyper_L
+! Leave mod4 as windows key _only_
+remove mod4 = Hyper_L
+
+! Set mod3 to capslock
+!clear mod3
+add mod3 = Hyper_L
+!
+!remove mod1 = Alt_R
+!add mod5 = Alt_R
+
+keycode 108 = Mode_switch
+
+keycode 24 = q Q aring Aring
+keycode 38 = a A adiaeresis Adiaeresis
+keycode 32 = o O odiaeresis Odiaeresis
+keycode 30 = u U udiaeresis Udiaeresis
+keycode 39 = s S ssharp
