@@ -12,7 +12,8 @@
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:DejaVu Sans Mono 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -168,34 +169,41 @@ bindsym Shift+XF86AudioLowerVolume exec amixer sset Master 1%-
 bindsym Shift+XF86AudioRaiseVolume exec amixer sset Master 1%+
 bindsym XF86AudioMute exec amixer sset Master toggle
 bindsym XF86AudioMicMute exec amixer sset Capture toggle
-bindsym XF86AudioPlay exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify --print-reply /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
-bindsym XF86AudioPrev exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify --print-reply /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
-bindsym XF86AudioNext exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify --print-reply /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+bindsym $mod+backslash exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify --print-reply /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym $mod+bracketleft exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify --print-reply /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym $mod+bracketright exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify --print-reply /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+
+#Backlight keys
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+bindsym Shift+XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
+bindsym Shift+XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
+
+#invert colors
+bindsym $mod+i exec xcalib -i -a
 
 #Toggle Touchpad
-exec /opt/scripts/touchpad_toggle.sh off
-bindsym XF86TouchpadToggle exec /opt/scripts/touchpad_toggle.sh
+#exec /opt/scripts/touchpad_toggle.sh off
+bindsym XF86Tools exec /opt/scripts/touchpad_toggle.sh
 
-bindsym XF86TaskPane exec /opt/scripts/rotate180.sh
-bindsym XF86RotateWindows exec /opt/scripts/rotate90.sh
+#bindsym XF86TaskPane exec /opt/scripts/rotate180.sh
+#bindsym XF86RotateWindows exec /opt/scripts/rotate90.sh
 
 #Screenshot
-bindsym Print exec gnome-screenshot
+#bindsym Print exec gnome-screenshot
 
-bindsym XF86Launch1 exec /opt/scripts/badumts.sh
+#bindsym XF86Launch1 exec /opt/scripts/badumts.sh
 
 #Background
 #exec i3-msg 'exec feh --bg-scale /home/anton/.i3/quallen.jpg'
 exec i3-msg 'exec xsetroot -solid "#000000"'
 
-#right click emulation
-exec /opt/scripts/right.sh
-
 exec /opt/scripts/umlaut.sh
 exec /opt/scripts/console_beep.sh
 
 #Start applications
-#exec i3-msg 'exec pidgin'
-exec i3-msg 'exec gajim'
 exec nm-applet
-exec quasselclient
+
+
+for_window [class="SpeedCrunch"] floating enable
+for_window [class="SpeedCrunch"] resize set 500 700

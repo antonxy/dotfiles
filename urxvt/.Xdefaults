@@ -1,119 +1,169 @@
+Xft.dpi: 120
+
 URxvt.saveLines: 10000
 URxvt.scrollBar: false
-#URxvt.foreground: white
-#URxvt.background: black
+URxvt.transparent: false
 URxvt.secondaryScroll: true
-URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=14
-URxvt.perl-ext-common: default,matcher
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=18
+!URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher: firefox
 URxvt.matcher.button: 1
-URxvt*inheritPixmap: true 
-#URxvt*shading: 70
-URxvt*iso14755: False
+!URxvt*inheritPixmap: true 
+!URxvt*shading: 0
 
-#copy with Ctrl-Shift-C
-URxvt.perl-ext-common: default,matcher,clipboard
+! Stop automatic scrolling when scrolling back
+URxvt*scrollTtyOutput:      false
+URxvt*scrollWithBuffer:     true
+URxvt*scrollTtyKeypress:    true
+
+URxvt.perl-ext-common: default,matcher,clipboard,resize-font
+
+! Disable bindings for ctrl-shift to work
+URxvt.iso14755: false 
+URxvt.iso14755_52: false
+
+!copy with Ctrl-Shift-C
 URxvt.keysym.Shift-Control-C: perl:clipboard:copy
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 
-#! PaperColor Theme
-#URxvt.foreground: #4D4D4C
-#URxvt.background: #EEEEEE
-#! black
-#URxvt.color0: #EDEDED
-#URxvt.color8: #969694
-#! red
-#URxvt.color1: #D7005F
-#URxvt.color9: #D7005F
-#! green
-#URxvt.color2: #718C00
-#URxvt.color10: #718C00
-#! yellow / orange
-#URxvt.color3: #D75F00
-#URxvt.color11: #D75F00
-#! blue
-#URxvt.color4: #4271AE
-#URxvt.color12: #4271AE
-#! magenta
-#URxvt.color5: #8959A8
-#URxvt.color13: #8959A8
-#! cyan
-#URxvt.color6: #3E999F
-#URxvt.color14: #3E999F
-#! white
-#URxvt.color7: #4D4D4C
-#URxvt.color15: #F5F5F5
-#
+!! PaperColor Theme
+!URxvt.foreground: #4D4D4C
+!URxvt.background: #EEEEEE
+!! black
+!URxvt.color0: #EDEDED
+!URxvt.color8: #969694
+!! red
+!URxvt.color1: #D7005F
+!URxvt.color9: #D7005F
+!! green
+!URxvt.color2: #718C00
+!URxvt.color10: #718C00
+!! yellow / orange
+!URxvt.color3: #D75F00
+!URxvt.color11: #D75F00
+!! blue
+!URxvt.color4: #4271AE
+!URxvt.color12: #4271AE
+!! magenta
+!URxvt.color5: #8959A8
+!URxvt.color13: #8959A8
+!! cyan
+!URxvt.color6: #3E999F
+!URxvt.color14: #3E999F
+!! white
+!URxvt.color7: #4D4D4C
+!URxvt.color15: #F5F5F5
+!
 
-! --- ~/.Xresources ------------------------------------------------------------
-! ------------------------------------------------------------------------------
-! --- generated with 4bit Terminal Color Scheme Designer -----------------------
-! ------------------------------------------------------------------------------
-! --- http://ciembor.github.com/4bit -------------------------------------------
-! ------------------------------------------------------------------------------
-! --- special colors ---
-*background: #e8e9e8
-*foreground: #242424
-! --- standard colors ---
+!! --- ~/.Xresources ------------------------------------------------------------
+!! ------------------------------------------------------------------------------
+!! --- generated with 4bit Terminal Color Scheme Designer -----------------------
+!! ------------------------------------------------------------------------------
+!! --- http://ciembor.github.com/4bit -------------------------------------------
+!! ------------------------------------------------------------------------------
+!! --- special colors ---
+!*background: #e9e9e9
+!*foreground: #242424
+!! --- standard colors ---
+!! black
+!*color0: #000000
+!! bright_black
+!*color8: #242424
+!! red
+!*color1: #bf1000
+!! bright_red
+!*color9: #e11300
+!! green
+!*color2: #00bf10
+!! bright_green
+!*color10: #00e113
+!! yellow
+!*color3: #afbf00
+!! bright_yellow
+!*color11: #cee100
+!! blue
+!*color4: #1000bf
+!! bright_blue
+!*color12: #1300e1
+!! magenta
+!*color5: #bf00af
+!! bright_magenta
+!*color13: #e100ce
+!! cyan
+!*color6: #00afbf
+!! bright_cyan
+!*color14: #00cee1
+!! white
+!*color7: #d5d5d5
+!! bright_white
+!*color15: #ffffff
+!! ------------------------------------------------------------------------------
+!! --- end of terminal colors section -------------------------------------------
+!! ------------------------------------------------------------------------------
+
+
+
+!! selenized medium color palette for urxvt.
+!
+!urxvt.background:  #154053
+!urxvt.foreground:  #a8bcc3
+!
+!! normal colors: "black", red, green, yellow, blue, magenta, cyan, "white"
+!urxvt.color0:      #245970
+!urxvt.color1:      #fc5851
+!urxvt.color2:      #78b93e
+!urxvt.color3:      #d8b033
+!urxvt.color4:      #4e97f5
+!urxvt.color5:      #f16dc5
+!urxvt.color6:      #41c7b9
+!urxvt.color7:      #a8bcc3
+!
+!! bright/bold versions of colors (in the same order)
+!urxvt.color8:      #7c95a0
+!urxvt.color9:      #ff675d
+!urxvt.color10:     #85c74c
+!urxvt.color11:     #e7be42
+!urxvt.color12:     #5ea4ff
+!urxvt.color13:     #ff7bd3
+!urxvt.color14:     #52d5c7
+!urxvt.color15:     #c4d8df
+!
+
+
+! special
+*.foreground:   #5a5758
+*.background:   #ffffff
+*.cursorColor:  #5a5758
+
 ! black
-*color0: #000000
-! bright_black
-*color8: #242424
+*.color0:       #231f20
+*.color8:       #737171
+
 ! red
-*color1: #bf1000
-! bright_red
-*color9: #e11300
+*.color1:       #ee2e24
+*.color9:       #ee2e24
+
 ! green
-*color2: #00bf10
-! bright_green
-*color10: #00e113
+*.color2:       #00853e
+*.color10:      #00853e
+
 ! yellow
-*color3: #afbf00
-! bright_yellow
-*color11: #cee100
+*.color3:       #ffd204
+*.color11:      #ffd204
+
 ! blue
-*color4: #1000bf
-! bright_blue
-*color12: #1300e1
+*.color4:       #009ddc
+*.color12:      #009ddc
+
 ! magenta
-*color5: #bf00af
-! bright_magenta
-*color13: #e100ce
+*.color5:       #98005d
+*.color13:      #98005d
+
 ! cyan
-*color6: #00afbf
-! bright_cyan
-*color14: #00cee1
+*.color6:       #85cebc
+*.color14:      #85cebc
+
 ! white
-*color7: #d5d5d5
-! bright_white
-*color15: #ffffff
-! ------------------------------------------------------------------------------
-! --- end of terminal colors section -------------------------------------------
-! ------------------------------------------------------------------------------
+*.color7:       #d9d8d8
+*.color15:      #ffffff
 
-
-
-#! selenized medium color palette for urxvt.
-#
-#urxvt.background:  #154053
-#urxvt.foreground:  #a8bcc3
-#
-#! normal colors: "black", red, green, yellow, blue, magenta, cyan, "white"
-#urxvt.color0:      #245970
-#urxvt.color1:      #fc5851
-#urxvt.color2:      #78b93e
-#urxvt.color3:      #d8b033
-#urxvt.color4:      #4e97f5
-#urxvt.color5:      #f16dc5
-#urxvt.color6:      #41c7b9
-#urxvt.color7:      #a8bcc3
-#
-#! bright/bold versions of colors (in the same order)
-#urxvt.color8:      #7c95a0
-#urxvt.color9:      #ff675d
-#urxvt.color10:     #85c74c
-#urxvt.color11:     #e7be42
-#urxvt.color12:     #5ea4ff
-#urxvt.color13:     #ff7bd3
-#urxvt.color14:     #52d5c7
-#urxvt.color15:     #c4d8df

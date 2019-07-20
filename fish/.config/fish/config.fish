@@ -4,5 +4,14 @@ set fish_greeting ""
 
 function dup
 	urxvt 2> /dev/null 1> /dev/null &
-	disown %last
+	disown $last_pid
+end
+
+export GOPATH=/home/anton/go
+set -U fish_user_paths /home/anton/go/bin $fish_user_paths
+export EDITOR=vim
+
+function qr
+	read in
+	qrencode -o - "$in" | display
 end

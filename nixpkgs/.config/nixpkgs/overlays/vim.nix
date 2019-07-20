@@ -10,26 +10,15 @@ let
     };
   };
 
-in
-{
-  my_vim = super.vim_configurable.customize {
-    name = "vim";
-    vimrcConfig.customRC = ''
+  basicRC = ''
       " Must have for vim
       set nocompatible
 
-      " Display nbsp
+      " Display nbsp and tab
       set listchars=tab:\|\ ,nbsp:·
       set list
 
-      " Remap ESC on ,,
-      map ,, <ESC>
-      imap ,, <ESC>
-
       scriptencoding utf-8
-
-      " Must be *after* pathogen
-      filetype plugin indent on
 
       " Leader
       let mapleader=" "
@@ -65,6 +54,7 @@ in
       " NERD Tree
       map <C-n> :NERDTreeToggle<CR>
 
+      " Start NERD Tree if no file opened at start
       autocmd StdinReadPre * let s:std_in=1
       autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
       autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -76,6 +66,9 @@ in
       nnoremap <C-l> :bnext<CR>
       nnoremap <C-h> :bprev<CR>
       nnoremap <C-c> :bp<bar>bd#<CR> " switch to previous and close last buffer (closing current closes window)
+      set hidden  " allow switching out of unsaved buffer
+
+      let g:buftabline_indicators=1
 
       " Switch between header and implementation
       "
@@ -101,26 +94,96 @@ in
           endtry
       endfunction
 
-      nnoremap <leader>h :call <SID>SwitchSourceHeader()<CR>
+      " Jumps
+      nnoremap <leader>jh :call <SID>SwitchSourceHeader()<CR>
 
       " Allow saving of files as sudo
       if !exists(":SudoW")
           command SudoW w !sudo tee % > /dev/null
       endif
-    '';
 
-    vimrcConfig.vam.knownPlugins = super.vimPlugins // customPlugins;
-    vimrcConfig.vam.pluginDictionaries = [
-        { names = [
-            # Here you can place all your vim plugins
-            # They are installed managed by `vam` (a vim plugin manager)
-            "ctrlp"
-            "The_NERD_tree"
-            "ack-vim"
-            "vim-buftabline"
-            "editorconfig-vim"
-            "vim-gitgutter"
-        ]; }
-    ];
+      " Path for snippets
+      " let &runtimepath.=','."~/.config/vim"
+
+  '';
+
+  ideRC = ''
+        " Jumps
+        nnoremap <leader>jd :call LanguageClient#textDocument_definition()<CR>
+        nnoremap <leader>ji :call LanguageClient_textDocument_implementation()<CR>
+
+        " Languange Client
+        nnoremap <leader>ll :call LanguageClient_contextMenu()<CR>
+        nnoremap <leader>lr :call LanguageClient_textDocument_rename()<CR>
+        nnoremap <leader>lh :call LanguageClient_textDocument_hover()<CR>
+        nnoremap <leader>la :call LanguageClient_textDocument_codeAction()<CR>
+
+        let g:LanguageClient_serverCommands = {
+          \ 'cpp': ['cquery'],
+          \ }
+
+        " This will show the popup menu even if there's only one match (menuone),
+        " and prevent automatic text injection
+        " into the current line (noinsert).
+        set completeopt=noinsert,menuone
+        
+        set completefunc=LanguageClient#complete
+
+        " Insert tab only after nothing but whitespace, else complete
+        function! Tab_Or_Complete()
+          "if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+          if col('.')>1 && strpart( getline('.'), 0, col('.')+1) !~ '^\s*$'
+            return "\<C-X>\<C-O>"
+          else
+            return "\<Tab>"
+          endif
+        endfunction
+        :inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
+  '';
+in
+{
+  my_nvim = super.neovim.override {
+    configure = {
+      customRC = basicRC + ideRC;
+      packages.myVimPackage = with super.vimPlugins // customPlugins; {
+        start = [
+          ctrlp
+          The_NERD_tree
+          ack-vim
+          vim-buftabline
+          editorconfig-vim
+          vim-gitgutter
+          #snipmate
+          LanguageClient-neovim
+        ];
+        # manually loadable by calling `:packadd $plugin-name`
+        opt = [
+        ];
+        # To automatically load a plugin when opening a filetype, add vimrc lines like:
+        # autocmd FileType php :packadd phpCompletion
+      };
+    };
+  };
+
+  my_vim = super.vim_configurable.customize {
+    name = "vim";
+    vimrcConfig.customRC = basicRC;
+    vimrcConfig.packages.myVimPackage = with super.vimPlugins // customPlugins; {
+      start = [
+        ctrlp
+        The_NERD_tree
+        ack-vim
+        vim-buftabline
+        editorconfig-vim
+        vim-gitgutter
+        #snipmate
+      ];
+      # manually loadable by calling `:packadd $plugin-name`
+      opt = [
+      ];
+      # To automatically load a plugin when opening a filetype, add vimrc lines like:
+      # autocmd FileType php :packadd phpCompletion
+    };
   };
 }
