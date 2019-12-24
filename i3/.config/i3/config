@@ -174,10 +174,16 @@ bindsym $mod+bracketleft exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify -
 bindsym $mod+bracketright exec "dbus-send --dest=org.mpris.MediaPlayer2.spotify --print-reply /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
 #Backlight keys
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
-bindsym Shift+XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
-bindsym Shift+XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+#bindsym Shift+XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
+#bindsym Shift+XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
+
+#Backlight keys
+bindsym XF86MonBrightnessUp exec bash -c "echo `expr $(cat /sys/class/backlight/intel_backlight/brightness) + 100` > /sys/class/backlight/intel_backlight/brightness" # increase screen brightness
+bindsym XF86MonBrightnessDown exec bash -c "echo `expr $(cat /sys/class/backlight/intel_backlight/brightness) - 100` > /sys/class/backlight/intel_backlight/brightness" # decrease screen brightness
+bindsym Shift+XF86MonBrightnessUp exec bash -c "echo `expr $(cat /sys/class/backlight/intel_backlight/brightness) + 10` > /sys/class/backlight/intel_backlight/brightness" # increase screen brightness
+bindsym Shift+XF86MonBrightnessDown exec bash -c "echo `expr $(cat /sys/class/backlight/intel_backlight/brightness) - 10` > /sys/class/backlight/intel_backlight/brightness" # decrease screen brightness
 
 #invert colors
 bindsym $mod+i exec xcalib -i -a
